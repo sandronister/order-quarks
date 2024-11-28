@@ -24,6 +24,7 @@ public class OrderController {
             orderService.createOrder(order);
             return Response.created(null).build();
         } catch (Exception e) {
+            e.printStackTrace();
             return Response.serverError().build();
         }
     }

@@ -1,5 +1,6 @@
 package org.sandroni.controller;
 
+import io.netty.handler.codec.http.HttpStatusClass;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
@@ -11,7 +12,7 @@ import org.sandroni.service.OrderService;
 
 import java.util.List;
 
-@Path("api/v1/order")
+@Path("api/v1/orders")
 public class OrderController {
 
     @Inject
@@ -24,7 +25,7 @@ public class OrderController {
             orderService.createOrder(order);
             return Response.created(null).build();
         } catch (Exception e) {
-            return Response.serverError().build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 
